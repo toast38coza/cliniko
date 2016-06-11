@@ -8,27 +8,41 @@
  * Service in the clinikoApp.
  */
 angular.module('clinikoApp')
-  .service('cliniko', function () {
-    
-  	// private methods:
-  	var _call = function (path, data) {
-  		// ..
-  	}
+  .service('cliniko', function ($resource) {
 
-    // public methods:
-    var api = {
-
-    	getProducts: function () {
-    		return [
-		      'HTML5 Boilerplate',
-		      'AngularJS',
-		      'Karma'
-		    ];
-    	}
-
+    var headers = { 
+      'Authorization': 'Basic MWJiODA4ZGNkYWU3ZDdmN2U4MWIzOThlNWY2ZjZiNmU6',
+      'Accept': 'application/json',
+      'User-Agent': 'Toast38coza (info@38.co.za)'
     };
+    
+    /*var headers = {
+      "Authorization": "token 1a44185c2bb2aa846c9b3407c8ee5332e4b67c41"
+    };*/
 
+    return $resource(
+              'http://docker.local:8000/v1/products/:id', 
+              { id: '@_id' },
+              {
+                get: {
+                  method: 'GET',
+                  data: false,
+                  headers: headers
+                },
+                query: {
+                  method: 'GET',
+                  data: false,
+                  headers: headers
+                }
+              }
+            );
 
-  	return api;
+    /*return $resource(
+              'https://api.cliniko.com/v1/products/:id', 
+              { id: '@_id' }, 
+              {
+                get: getSettings,
+                query: getSettings
+              });*/
 
   });

@@ -10,7 +10,7 @@
  */
 angular
   .module('clinikoApp', [
-    'ngRoute'
+    'ngRoute', 'ngResource'
   ])
   
   .config(function ($routeProvider) {

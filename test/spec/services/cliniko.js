@@ -11,8 +11,12 @@ describe('Service: cliniko', function () {
     cliniko = _cliniko_;
   }));
 
-  it('should do something', function () {
+  it('should be defined', function () {
     expect(!!cliniko).toBe(true);
   });
+
+  it('should be able to fetch a product by id');
+  it('should be able to fetch a list of products');
+  it('should be able to create a new product');
 
 });
