@@ -17,6 +17,13 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it("Should fetch all products for this account");
+  describe("User interface initialization", function(){
+    it("Should hide the add/edit form", function(){
+      expect(scope.stockLevelSearch).toBe(0);
+    });
+    it("Should set the stock filter to 0", function (){
+      expect(scope.productFormIsVisible).toBe(false);
+    });
+  });
   
 });

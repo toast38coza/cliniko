@@ -19,17 +19,7 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
-      })
-      .when('/new', {
-        templateUrl: 'views/new.html',
-        controller: 'NewCtrl',
-        controllerAs: 'new'
-      })
-      .when('/product', {
-        templateUrl: 'views/product.html',
-        controller: 'ProductCtrl',
-        controllerAs: 'product'
-      })
+      })      
       .otherwise({
         redirectTo: '/'
       });

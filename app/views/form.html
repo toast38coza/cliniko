@@ -1,0 +1,82 @@
+<section class="page px3 max-px0" role="main">
+    <!--if editing... Editing {{product.name}}-->
+    <h1 
+      ng-show="!product" 
+      class="h1 mb3">Add a new product</h1>
+    <h1 
+      ng-show="product" 
+      class="h1 mb3">Editing {{product.name}}</h1>
+    <form>
+      <fieldset class="form__fieldset mb3">
+        <div class="md-flex">
+          <div class="mb2 md-col-6 lg-col-4 md-mr2">
+            <label class="form__label mb1" for="item-code">Item code</label>
+            <input ng-model="product.code" autofocus="" class="form__input form__input--text" id="item-code" type="text" />
+          </div>
+          <div class="mb2 md-col-6 lg-col-4">
+            <label class="form__label mb1" for="name">Name</label>
+            <input ng-model="product.name"  class="form__input form__input--text has-error" id="name" required="" type="text" />
+            <div class="color-error bold mt1">Name can&rsquo;t be blank</div>
+          </div>
+        </div>
+        <div class="md-flex">
+          <div class="mb2 md-col-6 lg-col-4 md-mr2">
+            <label class="form__label mb1" for="serial-number">Serial number</label>
+            <input ng-model="product.serial_number" class="form__input form__input--text" id="serial-number" type="text" />
+          </div>
+          <div class="mb2 md-col-6 lg-col-4">
+            <label class="form__label mb1" for="supplier">Supplier</label>
+            <input ng-model="product.product_supplier_name" class="form__input form__input--text" id="supplier" type="text" />
+          </div>
+        </div>
+        <div class="mb2">
+          <label class="form__label mb1" for="price">Price</label>
+          <div class="flex flex-center">
+            <div class="form__addon mr2">
+              <span class="form__addon__span">$</span>
+              <input ng-model="product.price_ex_tax" class="form__input form__input--number form__addon__input has-error" id="price" type="number" />
+            </div>
+            <label class="form__label">
+              <input class="form__checkbox" type="checkbox" />Price includes tax</label>
+          </div>
+          <div class="color-error bold mt1">Price can&rsquo;t be blank</div>
+        </div>
+        <div class="md-flex">
+          <div class="mb2 md-mr2 flex-none">
+            <label class="form__label mb1" for="tax">Tax</label>
+            <select class="form__input form__select" id="tax">
+              <option class="form__option">N/A</option>
+              <option class="form__option" value="10">GST (10.0%)</option>
+              <option class="form__option" value="7">MST (7.0%)</option>
+            </select>
+          </div>
+          <div class="mb2 md-mr2">
+            <label class="form__label mb1" for="cost-price">Cost price</label>
+            <div class="form__addon">
+              <span class="form__addon__span">$</span>
+              <input ng-model="product.cost_price" class="form__input form__input--number form__addon__input" id="cost-price" type="text" />
+            </div>
+          </div>
+          <div class="mb2">
+            <!--if editing...-->
+            <!--<label class="form__label mb1" for="stock-level">Current stock level</label>-->
+            <!--<input class="form__input form__input--number" id="stock-level" type="number" disabled value={{product.stock}} />-->
+            <label class="form__label mb1" for="stock-level">Stock level</label>
+            <input ng-model="product.stock_level" class="form__input form__input--number" id="stock-level" type="text" />
+          </div>
+        </div>
+        <div class="mb2 prose">
+          <label class="form__label mb1" for="notes">Notes</label>
+          <textarea ng-model="product.notes" class="form__input form__textarea" id="notes"></textarea>
+        </div>
+      </fieldset>
+      
+      <button 
+        ng-show="!product"
+        class="button color-action mr1" type="submit">Create product</button>
+      <button 
+        ng-show="product"
+        class="button color-action mr1" type="submit">Save {{product.name}}</button>
+      <button class="button" type="submit">Cancel</button>
+    </form>
+  </section>
