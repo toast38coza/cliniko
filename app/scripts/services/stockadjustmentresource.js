@@ -2,17 +2,16 @@
 
 /**
  * @ngdoc service
- * @name clinikoApp.productResource
+ * @name clinikoApp.StockAdjustmentResource
  * @description
- * # productResource
+ * # StockAdjustmentResource
  * Factory in the clinikoApp.
  */
 angular.module('clinikoApp')
-  .factory('ProductResource', function ($resource, settings) {
+  .factory('StockAdjustmentResource', function ($resource, settings) {
     // Service logic
     // ...
 
-    // TODO: this goes into API Service
     // setup:
     var token = btoa(settings.clinikoApiToken+':');    
     var headers = { 
@@ -27,14 +26,10 @@ angular.module('clinikoApp')
     };
 
     return $resource(
-        getUrl('/v1/products/:id'), 
+        getUrl('/v1/stock_adjustments/:id'), 
         { id: '@_id' },
         {
-          get: { method: 'GET', data: false, headers: headers },
-          query: { method: 'GET', data: false, headers: headers },
-          save: { method: 'POST', headers: headers },
-          update: { method: 'PUT', headers: headers },
-          delete: { method: 'DELETE', headers: headers },
+          query: { method: 'GET', data: false, headers: headers },          
         }
     );
   });

@@ -35,8 +35,12 @@ angular.module('clinikoApp')
 
 	  		// or update if: $scope.product.id
 	  		if ($scope.product.id){
-	  			$scope.product.$save(updateSuccessResponse, genericErrorResponse);	
-	  			$scope.statusMessage = 'updating ' + $scope.product.name + ' ..';
+
+	  			ProductResource.update(
+	  						{id: $scope.product.id},
+	  						updateSuccessResponse,
+	  						genericErrorResponse);	
+	  			$scope.statusMessage = 'updating (' + $scope.product.id + ')' + $scope.product.name + ' ..';
 	  		
 	  		} else {
 
@@ -44,8 +48,7 @@ angular.module('clinikoApp')
 	  							createSuccessResponse, 
 	  							genericErrorResponse);	
 	  			$scope.statusMessage = 'Adding product ..';
-	  		}
-	  		
+	  		}	  		
 	  		
 	  	};
 

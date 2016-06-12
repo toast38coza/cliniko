@@ -8,9 +8,13 @@
  * Controller of the clinikoApp
  */
 angular.module('clinikoApp')
-  .controller('MainCtrl', function ($scope, productService, ProductResource) {
+  .controller('MainCtrl', function ($scope, ProductResource) {
     
-    $scope.products = ProductResource.query();
+    $scope.statusMessage = 'loading ...';
+
+    $scope.products = ProductResource.query(function(){
+      $scope.statusMessage = false;
+    });
   	$scope.activeProduct = false;
   	
     // settings and configs:

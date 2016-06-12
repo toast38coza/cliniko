@@ -20,6 +20,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })      
+      .when('/detail/:id', {
+        templateUrl: 'views/product.html',
+        controller: 'DetailviewCtrl',
+        controllerAs: 'detail'
+      })
       .otherwise({
         redirectTo: '/'
       });

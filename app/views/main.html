@@ -12,6 +12,8 @@
     </div>
   </header>
 
+  <div ng-if='statusMessage' class="alert alert-info" role="alert">{{statusMessage}}</div>
+
   <manage-product 
     ng-show='productFormIsVisible'
     products=products

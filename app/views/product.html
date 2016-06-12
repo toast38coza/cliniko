@@ -1,11 +1,16 @@
 
+<!-- todo: make a directive -->
 <section class="page px3 max-px0" role="main">
-  <button class="button button--link mb3">Back to products</button>
+  <a href="#/" class="button button--link mb3">Back to products</button>
   <header class="flex flex-center flex-justify mb3">
-    <h1 class="h1">Burn cream</h1>
-    <div class="flex" role="toolbar">
+    <h1 class="h1">{{product.name}}</h1>
+    <div 
+      ng-show='product.id'
+      class="flex" role="toolbar">
       <button class="button button--group">Edit product</button>
-      <button class="button button--group">Delete</button>
+      <button 
+        ng-click="delete(product);"
+        class="button button--group">Delete</button>
     </div>
   </header>
   <div class="md-flex mb6">
@@ -13,41 +18,45 @@
       <dl class="definition-list">
         <div class="definition-list__row">
           <dt class="definition-list__dt">Item code</dt>
-          <dd class="definition-list__dd">123222</dd>
+          <dd class="definition-list__dd">{{product.code||'..'}}</dd>
         </div>
         <div class="definition-list__row">
           <dt class="definition-list__dt">Serial number</dt>
-          <dd class="definition-list__dd">12</dd>
+          <dd class="definition-list__dd">{{product.serial_number||'..'}}</dd>
         </div>
         <div class="definition-list__row">
           <dt class="definition-list__dt">Supplier</dt>
-          <dd class="definition-list__dd">Derma</dd>
+          <dd class="definition-list__dd">{{product.product_supplier_name||'..'}}</dd>
         </div>
         <div class="definition-list__row">
           <dt class="definition-list__dt">Price (ex. tax)</dt>
-          <dd class="definition-list__dd">$24.00</dd>
+          <dd class="definition-list__dd">${{product.price_ex_tax||'..'}}</dd>
         </div>
         <div class="definition-list__row">
           <dt class="definition-list__dt">Cost price</dt>
-          <dd class="definition-list__dd">$12.00</dd>
+          <dd class="definition-list__dd">${{product.cost_price||'..'}}</dd>
         </div>
         <div class="definition-list__row">
           <dt class="definition-list__dt">Stock level</dt>
-          <dd class="definition-list__dd">21</dd>
+          <dd class="definition-list__dd">{{product.stock_level||'..'}}</dd>
         </div>
       </dl>
     </div>
     <!--Only show if notes-->
-    <section class="note">
+    <section 
+      ng-if="product.notes"
+      class="note">
       <h1 class="h2 mb3">Notes</h1>
-      <p class="prose">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tristique volutpat metus nec commodo. In hac habitasse platea dictumst.</p>
+      <p class="prose">{{product.notes}}</p>
     </section>
   </div>
+
+  <pre><code>{{stockAdjustments}}</code></pre>
   <section>
     <header class="flex flex-center flex-justify mb3">
       <div class="flex mr3">
         <h1 class="h2">Stock Adjustments</h1>
-        <span class="callout">4</span>
+        <span class="callout">{{stockAdjustments.stock_adjustments.length}}</span>
       </div>
       <div role="toolbar">
         <!-- You don't have to implement this -->
@@ -64,26 +73,9 @@
             <th class="table__cell-header">Adjusted by</th>
             <th class="table__cell-header">Notes</th>
           </tr>
-          <tr class="table__row">
-            <td class="table__cell" data-label="Adjustment type">Other</td>
-            <td class="table__cell" data-label="Quantity">20</td>
-            <td class="table__cell" data-label="Adjusted at">30 Oct 2015, 2:03PM</td>
-            <td class="table__cell" data-label="Adjusted by">Elizabeth Hans</td>
-            <td class="table__cell" data-label="Notes">Mistake. I only meant to mark one sold on the last transaction.</td>
-          </tr>
-          <tr class="table__row bg-silver">
-            <td class="table__cell" data-label="Adjustment type">Item Sold</td>
-            <td class="table__cell" data-label="Quantity">-21</td>
-            <td class="table__cell" data-label="Adjusted at">30 Oct 2015, 2:02PM</td>
-            <td class="table__cell" data-label="Adjusted by">Elizabeth Hans</td>
-            <td class="table__cell" data-label="Notes"></td>
-          </tr>
-          <tr class="table__row">
-            <td class="table__cell" data-label="Adjustment type">Stock Purchase</td>
-            <td class="table__cell" data-label="Quantity">10</td>
-            <td class="table__cell" data-label="Adjusted at">30 Oct 2015, 1:59PM</td>
-            <td class="table__cell" data-label="Adjusted by">Elizabeth Hans</td>
-            <td class="table__cell" data-label="Notes">Had to buy at least 10 to get current price.</td>
+          <tr ng-repeat="adjustment in stockAdjustments.stock_adjustments" class="table__row">
+
+            <td ng-repeat="(key,value) in adjustment" class="table__cell" data-label="Adjustment {{key}}">{{value}}</td>            
           </tr>
         </tbody>
       </table>
