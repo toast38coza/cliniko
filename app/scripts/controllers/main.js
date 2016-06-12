@@ -8,25 +8,21 @@
  * Controller of the clinikoApp
  */
 angular.module('clinikoApp')
-  .controller('MainCtrl', function ($scope, productService) {
+  .controller('MainCtrl', function ($scope, productService, ProductResource) {
     
-    //$scope.products = productService.resource.query();    
-  	$scope.products = productService.getProducts();
+    $scope.products = ProductResource.query();
   	$scope.activeProduct = false;
-  	//productService.refreshProducts();
-  	//var data = {id: '976065'};
-    //$scope.product = cliniko.get(data);
-
+  	
     // settings and configs:
     $scope.stockLevelSearch = 0;
     $scope.productFormIsVisible = false;
 
     $scope.setActiveProduct = function (product){
-    	$scope.productFormIsvisible = true;
     	$scope.activeProduct = product;
     };
-    $scope.showProductForm = function (){
-    	$scope.productFormIsvisible = true;
+
+    $scope.showProductForm = function (showIt){
+    	$scope.productFormIsVisible = showIt;
     };
 
     $scope.clearActiveProduct = function () {

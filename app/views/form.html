@@ -6,7 +6,11 @@
     <h1 
       ng-show="product" 
       class="h1 mb3">Editing {{product.name}}</h1>
+
+    <h3>ID: {{product.id}}</h3>
     <form>
+      <div ng-show='formStatus.message' 
+        class="alert alert-warning" role="alert">{{formStatus.message}}</div>
       <fieldset class="form__fieldset mb3">
         <div class="md-flex">
           <div class="mb2 md-col-6 lg-col-4 md-mr2">
@@ -15,7 +19,7 @@
           </div>
           <div class="mb2 md-col-6 lg-col-4">
             <label class="form__label mb1" for="name">Name</label>
-            <input ng-model="product.name"  class="form__input form__input--text has-error" id="name" required="" type="text" />
+            <input ng-model="product.name"  class="form__input form__input--text has-error" id="name" type="text" />
             <div class="color-error bold mt1">Name can&rsquo;t be blank</div>
           </div>
         </div>
@@ -29,17 +33,23 @@
             <input ng-model="product.product_supplier_name" class="form__input form__input--text" id="supplier" type="text" />
           </div>
         </div>
+        <!-- todo: these could be directives -->
         <div class="mb2">
           <label class="form__label mb1" for="price">Price</label>
           <div class="flex flex-center">
             <div class="form__addon mr2">
               <span class="form__addon__span">$</span>
-              <input ng-model="product.price_ex_tax" class="form__input form__input--number form__addon__input has-error" id="price" type="number" />
+              <input 
+                ng-model="product.price" 
+                class="form__input form__input--number form__addon__input has-error" 
+                id="price" type="text" />
             </div>
             <label class="form__label">
               <input class="form__checkbox" type="checkbox" />Price includes tax</label>
           </div>
-          <div class="color-error bold mt1">Price can&rsquo;t be blank</div>
+          <div 
+            ng-show='formStatus.errors.price'
+            class="color-error bold mt1">{{formStatus.errors.price}}</div>
         </div>
         <div class="md-flex">
           <div class="mb2 md-mr2 flex-none">
@@ -71,12 +81,18 @@
         </div>
       </fieldset>
       
-      <button 
-        ng-show="!product"
-        class="button color-action mr1" type="submit">Create product</button>
+      <div>{{statusMessage}}</div>
       <button 
         ng-show="product"
-        class="button color-action mr1" type="submit">Save {{product.name}}</button>
-      <button class="button" type="submit">Cancel</button>
+        ng-click="add()"
+        class="button color-action mr1" >Save {{product.name}}</button>
+      <button 
+        ng-click='showProductForm(false)'
+        class="button" type="submit">Cancel</button>
+
+      <button 
+        ng-show="product.id"
+        ng-click="delete(product.id)"
+        class="button color-action mr1" >Delete {{product.name}}</button>
     </form>
   </section>

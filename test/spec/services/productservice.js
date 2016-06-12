@@ -31,5 +31,11 @@ describe('Service: productService', function () {
     
   });
 
+  describe("CRUD", function () {
+
+    
+    
+  });
+
 
 });
