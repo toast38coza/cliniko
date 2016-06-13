@@ -28,10 +28,7 @@ describe('Directive: manageProduct', function () {
       controller = element.controller;
 
     }));
-    it('Provides $scope.add() for adding a new product', function(){
-      console.log(scope);
-    });
-
+    
   });
 
 });
