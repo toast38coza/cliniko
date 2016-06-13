@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: DetailviewCtrl', function () {
+describe('Controller: ManageCtrl', function () {
 
   // load the controller's module
   beforeEach(module('clinikoApp'));
 
-  var DetailviewCtrl,
+  var ManageCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    DetailviewCtrl = $controller('DetailviewCtrl', {
+    ManageCtrl = $controller('ManageCtrl', {
       $scope: scope
       // place here mocked dependencies
     });

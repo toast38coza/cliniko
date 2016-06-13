@@ -11,10 +11,9 @@ angular.module('clinikoApp')
   .controller('DetailviewCtrl', function ($scope, $routeParams, $location, ProductResource, StockAdjustmentResource) {
     
   	$scope.product = ProductResource.get({id: $routeParams.id});
-  	var params = {'product_id': $routeParams.id};
-  	$scope.stockAdjustments = StockAdjustmentResource.query(params);
-
+  	
   	// todo: should warn before deleting ..
+    // todo: make into a directive
   	$scope.delete = function (product){
   		ProductResource.delete({id: product.id}, function(){
   			$location.path('/');

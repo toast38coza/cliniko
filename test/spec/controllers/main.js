@@ -5,7 +5,7 @@ describe('Controller: MainCtrl', function () {
   // load the controller's module
   beforeEach(module('clinikoApp'));
 
-  var MainCtrl, scope, $httpBackend;
+  var MainCtrl, scope;
 
   // Initialize the controller and a mock scope
   //_$httpBackend_
@@ -17,14 +17,5 @@ describe('Controller: MainCtrl', function () {
       // place here mocked dependencies
     });
   }));
-
-  describe('User interface initialization', function(){
-    it('Should hide the add/edit form', function(){
-      expect(scope.stockLevelSearch).toBe(0);
-    });
-    it('Should set the stock filter to 0', function (){
-      expect(scope.productFormIsVisible).toBe(false);
-    });
-  });
 
 });

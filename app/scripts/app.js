@@ -25,6 +25,16 @@ angular
         controller: 'DetailviewCtrl',
         controllerAs: 'detail'
       })
+      .when('/product/:id/edit', {
+        templateUrl: 'views/form.html',
+        controller: 'ManageCtrl',
+        controllerAs: 'manage'
+      })
+      .when('/product/new', {
+        templateUrl: 'views/form.html',
+        controller: 'ManageCtrl',
+        controllerAs: 'manage'
+      })
       .otherwise({
         redirectTo: '/'
       });

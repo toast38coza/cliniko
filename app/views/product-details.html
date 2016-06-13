@@ -1,0 +1,37 @@
+<div class="md-flex mb6">
+  <div class="md-col-6 lg-col-5 mb3 md-mb0 md-mr6 flex-none">
+    <dl class="definition-list">
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Item code</dt>
+        <dd class="definition-list__dd">{{product.code||'..'}}</dd>
+      </div>
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Serial number</dt>
+        <dd class="definition-list__dd">{{product.serial_number||'..'}}</dd>
+      </div>
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Supplier</dt>
+        <dd class="definition-list__dd">{{product.product_supplier_name||'..'}}</dd>
+      </div>
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Price (ex. tax)</dt>
+        <dd class="definition-list__dd">${{product.price_ex_tax||'..'}}</dd>
+      </div>
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Cost price</dt>
+        <dd class="definition-list__dd">${{product.cost_price||'..'}}</dd>
+      </div>
+      <div class="definition-list__row">
+        <dt class="definition-list__dt">Stock level</dt>
+        <dd class="definition-list__dd">{{product.stock_level||'..'}}</dd>
+      </div>
+    </dl>
+  </div>
+  <!--Only show if notes-->
+  <section 
+    ng-if="product.notes"
+    class="note">
+    <h1 class="h2 mb3">Notes</h1>
+    <p class="prose">{{product.notes}}</p>
+  </section>
+</div>

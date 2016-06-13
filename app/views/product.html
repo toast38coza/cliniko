@@ -1,7 +1,7 @@
 
 <!-- todo: make a directive -->
 <section class="page px3 max-px0" role="main">
-  <a href="#/" class="button button--link mb3">Back to products</button>
+  <a href="#/" class="button button--link mb3">Back to products</a>
   <header class="flex flex-center flex-justify mb3">
     <h1 class="h1">{{product.name}}</h1>
     <div 
@@ -13,73 +13,9 @@
         class="button button--group">Delete</button>
     </div>
   </header>
-  <div class="md-flex mb6">
-    <div class="md-col-6 lg-col-5 mb3 md-mb0 md-mr6 flex-none">
-      <dl class="definition-list">
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Item code</dt>
-          <dd class="definition-list__dd">{{product.code||'..'}}</dd>
-        </div>
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Serial number</dt>
-          <dd class="definition-list__dd">{{product.serial_number||'..'}}</dd>
-        </div>
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Supplier</dt>
-          <dd class="definition-list__dd">{{product.product_supplier_name||'..'}}</dd>
-        </div>
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Price (ex. tax)</dt>
-          <dd class="definition-list__dd">${{product.price_ex_tax||'..'}}</dd>
-        </div>
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Cost price</dt>
-          <dd class="definition-list__dd">${{product.cost_price||'..'}}</dd>
-        </div>
-        <div class="definition-list__row">
-          <dt class="definition-list__dt">Stock level</dt>
-          <dd class="definition-list__dd">{{product.stock_level||'..'}}</dd>
-        </div>
-      </dl>
-    </div>
-    <!--Only show if notes-->
-    <section 
-      ng-if="product.notes"
-      class="note">
-      <h1 class="h2 mb3">Notes</h1>
-      <p class="prose">{{product.notes}}</p>
-    </section>
-  </div>
-
-  <pre><code>{{stockAdjustments}}</code></pre>
-  <section>
-    <header class="flex flex-center flex-justify mb3">
-      <div class="flex mr3">
-        <h1 class="h2">Stock Adjustments</h1>
-        <span class="callout">{{stockAdjustments.stock_adjustments.length}}</span>
-      </div>
-      <div role="toolbar">
-        <!-- You don't have to implement this -->
-        <button class="button">Adjust stock level</button>
-      </div>
-    </header>
-    <div class="mxn3 max-mx0">
-      <table class="table mb6">
-        <tbody>
-          <tr class="table__row-header">
-            <th class="table__cell-header">Adjustment type</th>
-            <th class="table__cell-header">Quantity</th>
-            <th class="table__cell-header">Adjusted at</th>
-            <th class="table__cell-header">Adjusted by</th>
-            <th class="table__cell-header">Notes</th>
-          </tr>
-          <tr ng-repeat="adjustment in stockAdjustments.stock_adjustments" class="table__row">
-
-            <td ng-repeat="(key,value) in adjustment" class="table__cell" data-label="Adjustment {{key}}">{{value}}</td>            
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  
+  <product-details product=product ></product-details>
+  <stock-adjustments-list product=product></stock-adjustments-list>
+  
 </section>
 
