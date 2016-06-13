@@ -1,0 +1,15 @@
+<section class="page px3 max-px0" role="main">
+<!--if editing... Editing {{product.name}}-->
+<h1 
+  ng-show="mode=='add'" 
+  class="h1 mb3">Add a new product</h1>
+<h1 
+  ng-show="mode=='edit'" 
+  class="h1 mb3">Editing {{product.name}}</h1>
+
+  <manage-product 
+  	product=product
+  	mode=mode >
+  </manage-product>
+
+</section>

@@ -14,50 +14,40 @@ angular.module('clinikoApp')
       scope: {
       	products: '=products',
 	  	product: '=product',
-	  	showProductForm: '=showProductForm'
+	  	mode: '=mode'
 	  },
-	  controller: ['$scope', function($scope) {
+	  controller: ['$scope', '$location', function($scope, $location) {
 
-	  	var genericErrorResponse = function (error) {
+	  	var errorResponse = function (error) {
+	  		$scope.formStatus.saving = false;
   			$scope.formStatus = error.data;
   		};
 
-  		var createSuccessResponse = function () {
-  			$scope.products.products.push($scope.product);
-  		};
-
-  		var updateSuccessResponse = function () {
-  			// ...
+  		var successResponse = function (data) {   			 		
+  			$scope.formStatus.saving = false;	
+  			$location.path('/detail/' + data.id);
   		};
 
 	  	$scope.formStatus = {};
-	  	$scope.add = function (){	  
+	  	$scope.save = function (){	  
 
-	  		// or update if: $scope.product.id
+	  		$scope.formStatus.saving = true;
+	  		// or update if: $scope.product.id	  		
 	  		if ($scope.product.id){
-
-	  			ProductResource.update(
-	  						{id: $scope.product.id},
-	  						updateSuccessResponse,
-	  						genericErrorResponse);	
-	  			$scope.statusMessage = 'updating (' + $scope.product.id + ')' + $scope.product.name + ' ..';
+	  			$scope.product.$update(
+	  						successResponse,
+	  						errorResponse);	
+	  			$scope.formStatus.message = 'updating (' + $scope.product.id + ')' + $scope.product.name + ' ..';
 	  		
 	  		} else {
 
 	  			ProductResource.save($scope.product, 
-	  							createSuccessResponse, 
-	  							genericErrorResponse);	
-	  			$scope.statusMessage = 'Adding product ..';
+	  							successResponse, 
+	  							errorResponse);	
+	  			$scope.formStatus.message = 'Adding product ..';
 	  		}	  		
 	  		
 	  	};
-
-	  	$scope.delete = function (product) {	  		
-	  		ProductResource.delete({id: product.id}, function (){
-	  			// remove it from the list
-	  		});
-	  	};
-
 
 	  }]
 	  /*,

@@ -26,12 +26,12 @@ angular
         controllerAs: 'detail'
       })
       .when('/product/:id/edit', {
-        templateUrl: 'views/form.html',
+        templateUrl: 'views/pages/manage.html',
         controller: 'ManageCtrl',
         controllerAs: 'manage'
       })
       .when('/product/new', {
-        templateUrl: 'views/form.html',
+        templateUrl: 'views/pages/manage.html',
         controller: 'ManageCtrl',
         controllerAs: 'manage'
       })

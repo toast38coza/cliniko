@@ -15,9 +15,13 @@ angular.module('clinikoApp')
 	  },
 	  controller: ['$scope', 'StockAdjustmentResource', function($scope, StockAdjustmentResource) {
 	  	
-	  	var params = {'product_id': $scope.product.id};
-  		$scope.stockAdjustments = StockAdjustmentResource.query(params);
-
+      $scope.statusMessage = 'Loading stock adjustments for ' + $scope.product.name + ' ..';
+      $scope.product.$promise.then(function(product){
+        $scope.statusMessage = false;        
+        var params = {q: 'product_id:=' + product.id};
+        $scope.stockAdjustments = StockAdjustmentResource.query(params);
+      });
+	  	
 	  }],
       restrict: 'E'      
     };

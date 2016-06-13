@@ -1,99 +1,154 @@
-{{mode}}
-<section class="page px3 max-px0" role="main">
-    <!--if editing... Editing {{product.name}}-->
-    <h1 
-      ng-show="!product" 
-      class="h1 mb3">Add a new product</h1>
-    <h1 
-      ng-show="product" 
-      class="h1 mb3">Editing {{product.name}}</h1>
+<form name="form" novalidate >
+  <div ng-show='formStatus.message' 
+    class="alert alert-warning" role="alert">{{formStatus.message}}</div>
+  <fieldset 
+    ng-disabled="formStatus.saving"
+    class="form__fieldset mb3">
+    <div class="md-flex">
 
-    <h3>ID: {{product.id}}</h3>
-    <form>
-      <div ng-show='formStatus.message' 
-        class="alert alert-warning" role="alert">{{formStatus.message}}</div>
-      <fieldset class="form__fieldset mb3">
-        <div class="md-flex">
-          <div class="mb2 md-col-6 lg-col-4 md-mr2">
-            <label class="form__label mb1" for="item-code">Item code</label>
-            <input ng-model="product.code" autofocus="" class="form__input form__input--text" id="item-code" type="text" />
-          </div>
-          <div class="mb2 md-col-6 lg-col-4">
-            <label class="form__label mb1" for="name">Name</label>
-            <input ng-model="product.name"  class="form__input form__input--text has-error" id="name" type="text" />
-            <div class="color-error bold mt1">Name can&rsquo;t be blank</div>
-          </div>
-        </div>
-        <div class="md-flex">
-          <div class="mb2 md-col-6 lg-col-4 md-mr2">
-            <label class="form__label mb1" for="serial-number">Serial number</label>
-            <input ng-model="product.serial_number" class="form__input form__input--text" id="serial-number" type="text" />
-          </div>
-          <div class="mb2 md-col-6 lg-col-4">
-            <label class="form__label mb1" for="supplier">Supplier</label>
-            <input ng-model="product.product_supplier_name" class="form__input form__input--text" id="supplier" type="text" />
-          </div>
-        </div>
-        <!-- todo: these could be directives -->
-        <div class="mb2">
-          <label class="form__label mb1" for="price">Price</label>
-          <div class="flex flex-center">
-            <div class="form__addon mr2">
-              <span class="form__addon__span">$</span>
-              <input 
-                ng-model="product.price" 
-                class="form__input form__input--number form__addon__input has-error" 
-                id="price" type="text" />
-            </div>
-            <label class="form__label">
-              <input class="form__checkbox" type="checkbox" />Price includes tax</label>
-          </div>
-          <div 
-            ng-show='formStatus.errors.price'
-            class="color-error bold mt1">{{formStatus.errors.price}}</div>
-        </div>
-        <div class="md-flex">
-          <div class="mb2 md-mr2 flex-none">
-            <label class="form__label mb1" for="tax">Tax</label>
-            <select class="form__input form__select" id="tax">
-              <option class="form__option">N/A</option>
-              <option class="form__option" value="10">GST (10.0%)</option>
-              <option class="form__option" value="7">MST (7.0%)</option>
-            </select>
-          </div>
-          <div class="mb2 md-mr2">
-            <label class="form__label mb1" for="cost-price">Cost price</label>
-            <div class="form__addon">
-              <span class="form__addon__span">$</span>
-              <input ng-model="product.cost_price" class="form__input form__input--number form__addon__input" id="cost-price" type="text" />
-            </div>
-          </div>
-          <div class="mb2">
-            <!--if editing...-->
-            <!--<label class="form__label mb1" for="stock-level">Current stock level</label>-->
-            <!--<input class="form__input form__input--number" id="stock-level" type="number" disabled value={{product.stock}} />-->
-            <label class="form__label mb1" for="stock-level">Stock level</label>
-            <input ng-model="product.stock_level" class="form__input form__input--number" id="stock-level" type="text" />
-          </div>
-        </div>
-        <div class="mb2 prose">
-          <label class="form__label mb1" for="notes">Notes</label>
-          <textarea ng-model="product.notes" class="form__input form__textarea" id="notes"></textarea>
-        </div>
-      </fieldset>
+      <!-- item code -->
+      <div class="mb2 md-col-6 lg-col-4 md-mr2">
+        <label class="form__label mb1" for="item-code">Item code</label>
+        <input ng-model="product.item_code" autofocus="" class="form__input form__input--text" id="item-code" type="text" />
+      </div>
       
-      <div>status: {{statusMessage}}</div>
-      <button 
-        ng-show="product"
-        ng-click="add()"
-        class="button color-action mr1" >Save {{product.name}}</button>
-      <button 
-        ng-click='showProductForm(false)'
-        class="button" type="submit">Cancel</button>
+      <!-- Product Name -->
+      <div class="mb2 md-col-6 lg-col-4">
+        <label class="form__label mb1" for="name">Name</label>
+        <input 
+          ng-model="product.name"            
+          class="form__input form__input--text 
+                 ng-class:{ 'has-error': 
+                                form.name.$touched 
+                                && form.name.$error.required };" 
+          
+          id="name" name="name" type="text" required />
+        
+        <div ng-show="form.$submitted || form.name.$touched">
+          <div 
+            ng-show="form.name.$error.required"
+            class="color-error bold mt1" >Product needs a name.</div>
+        </div>        
+      </div>
 
-      <button 
-        ng-show="product.id"
-        ng-click="delete(product.id)"
-        class="button color-action mr1" >Delete {{product.name}}</button>
-    </form>
-  </section>
+    </div>
+    <div class="md-flex">
+      <!-- serial number -->
+      <div class="mb2 md-col-6 lg-col-4 md-mr2">
+        <label class="form__label mb1" for="serial-number">Serial number</label>
+        <input ng-model="product.serial_number" class="form__input form__input--text" id="serial-number" type="text" />
+      </div>
+
+      <!-- supplier -->
+      <div class="mb2 md-col-6 lg-col-4">
+        <label class="form__label mb1" for="supplier">Supplier</label>
+        <input ng-model="product.product_supplier_name" class="form__input form__input--text" id="supplier" type="text" />
+      </div>
+
+    </div>
+    
+    <!-- 
+      todo: i'm sure there's a better way to 
+      manage this ..
+    -->
+    <!-- price ex tax - use for edit -->
+    <div 
+      ng-show="mode=='edit'"
+      class="mb2" >      
+      <label class="form__label mb1" for="price_ex_tax">Price</label>
+      <div class="flex flex-center">
+        <div class="form__addon mr2">
+          <span class="form__addon__span">$</span>
+          <input 
+            ng-model="product.price_ex_tax" 
+            class="form__input form__input--number form__addon__input
+                  ng-class:{ 'has-error': 
+                                form.price_ex_tax.$touched 
+                                && form.price_ex_tax.$error.required };" 
+            id="price_ex_tax" name="price_ex_tax" 
+            type="number" required step="any" min="0" numericbinding />   
+        
+        </div>
+        <!-- with tax? -->
+        <label class="form__label">
+          <input class="form__checkbox" type="checkbox" />price includes tax</label>
+      </div>
+      <div ng-show="form.$submitted || form.price_ex_tax.$touched">
+          <div 
+          ng-show="form.price_ex_tax.$error.required"
+          class="color-error bold mt1" >Please enter a price_ex_tax.</div>
+        <div 
+          ng-show="form.price_ex_tax.$error.number"
+          class="color-error bold mt1" >Price must be a number.</div>
+      </div>
+    </div>
+
+    <!-- Price + tax - use this for add -->
+    <div 
+      ng-show="mode=='add'"
+      class="mb2" >      
+      <label class="form__label mb1" for="price">Price</label>
+      <div class="flex flex-center">
+        <div class="form__addon mr2">
+          <span class="form__addon__span">$</span>
+          <input 
+            ng-model="product.price" 
+            class="form__input form__input--number form__addon__input
+                  ng-class:{ 'has-error': 
+                                form.price.$touched 
+                                && form.price.$error.required };" 
+            id="price" name="price" type="number" required />   
+        
+        </div>
+        <!-- with tax? -->
+        <label class="form__label">
+          <input class="form__checkbox" type="checkbox" />Price includes tax</label>
+      </div>
+      <div ng-show="form.$submitted || form.price.$touched">
+          <div 
+          ng-show="form.price.$error.required"
+          class="color-error bold mt1" >Please enter a price.</div>
+        <div 
+          ng-show="form.price.$error.number"
+          class="color-error bold mt1" >Price must be a number.</div>
+      </div>
+    </div>
+    <div class="md-flex">
+      <div class="mb2 md-mr2 flex-none">
+        <label class="form__label mb1" for="tax">Tax</label>
+        <select class="form__input form__select" id="tax">
+          <option class="form__option">N/A</option>
+          <option class="form__option" value="10">GST (10.0%)</option>
+          <option class="form__option" value="7">MST (7.0%)</option>
+        </select>
+      </div>
+      <div class="mb2 md-mr2">
+        <label class="form__label mb1" for="cost-price">Cost price</label>
+        <div class="form__addon">
+          <span class="form__addon__span">$</span>
+          <input ng-model="product.cost_price" class="form__input form__input--number form__addon__input" id="cost-price" type="text" />
+        </div>
+      </div>
+      <div class="mb2">
+        <label  
+          ng-show="mode=='edit'"
+          class="form__label mb1" for="stock-level">Current stock level is {{product.stock_level || 0}}</label>
+        <label 
+          ng-show="mode=='add'"
+          class="form__label mb1" for="stock-level">Stock level</label>
+        <input ng-disabled="mode=='edit'" ng-model="product.stock_level" class="form__input form__input--number" id="stock-level" type="text" />
+      </div>
+    </div>
+    <div class="mb2 prose">
+      <label class="form__label mb1" for="notes">Notes</label>
+      <textarea ng-model="product.notes" class="form__input form__textarea" id="notes"></textarea>
+    </div>
+  </fieldset>
+  <pre><code>{{product}}</code></pre>
+  <button 
+    ng-click="save()"
+    class="button color-action mr1" >Save</button>
+  <a href="/#/" class="button" >Cancel</a>
+
+  
+</form>

@@ -8,33 +8,17 @@
  * Factory in the clinikoApp.
  */
 angular.module('clinikoApp')
-  .factory('ProductResource', function ($resource, settings) {
-    // Service logic
-    // ...
-
-    // TODO: this goes into API Service
-    // setup:
-    var token = btoa(settings.clinikoApiToken+':');    
-    var headers = { 
-      'Authorization': 'Basic ' + token,
-      'Accept': 'application/json',
-      //'User-Agent': settings.clinikoVendorName + ' (' + settings.clinikoVendorEmail + ')'
-    };
-
-    // private methods:
-    var getUrl = function (path){
-      return settings.clinikoApiBase + path;
-    };
-
+  .factory('ProductResource', function ($resource, settings, api) {
+    
     return $resource(
-        getUrl('/v1/products/:id'), 
-        { id: '@_id' },
+        api.getUrl('/v1/products/:id'), 
+        { id: '@id' },
         {
-          get: { method: 'GET', data: false, headers: headers },
-          query: { method: 'GET', data: false, headers: headers },
-          save: { method: 'POST', headers: headers },
-          update: { method: 'PUT', headers: headers },
-          delete: { method: 'DELETE', headers: headers },
+          get: { method: 'GET', data: false, headers: api.headers },
+          query: { method: 'GET', data: false, headers: api.headers },
+          save: { method: 'POST', headers: api.headers },
+          update: { method: 'PUT', data: false,  headers: api.headers },
+          delete: { method: 'DELETE', headers: api.headers },
         }
     );
   });

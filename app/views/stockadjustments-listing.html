@@ -1,4 +1,7 @@
-<section>
+<div ng-if='statusMessage' class="alert alert-info" role="alert">{{statusMessage}}</div>
+
+<!-- todo: better loading messages -->
+<section  >
   <div 
     ng-show="stockAdjustments.stock_adjustments.total_entries > 0"
     class="alert alert-success" >No stock adjustments</div>
@@ -22,6 +25,13 @@
           <th class="table__cell-header">Adjusted at</th>
           <th class="table__cell-header">Adjusted by</th>
           <th class="table__cell-header">Notes</th>
+        </tr>
+        <tr ng-show="stockAdjustments.total_entries==0" >        
+          <td>Initial Stock Level</td>
+          <td>{{product.stock_level}}</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
         </tr>
         <tr ng-repeat="adjustment in stockAdjustments.stock_adjustments" class="table__row">
             <td class="table__cell" data-label="Adjustment type">
