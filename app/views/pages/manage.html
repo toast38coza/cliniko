@@ -5,9 +5,14 @@
   class="h1 mb3">Add a new product</h1>
 <h1 
   ng-show="mode=='edit'" 
-  class="h1 mb3">Editing {{product.name}}</h1>
+  class="h1 mb3">Editing <a href='#/detail/{{product.id}}'>{{product.name}}</a></h1>
+
+  <div 
+  	ng-show='loading' class='alert alert-warning' >{{statusMessage || 'loading..' }}</div>
+
 
   <manage-product 
+  	ng-show=!loading
   	product=product
   	mode=mode >
   </manage-product>

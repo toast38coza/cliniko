@@ -9,7 +9,7 @@
       <!-- item code -->
       <div class="mb2 md-col-6 lg-col-4 md-mr2">
         <label class="form__label mb1" for="item-code">Item code</label>
-        <input ng-model="product.item_code" autofocus="" class="form__input form__input--text" id="item-code" type="text" />
+        <input ng-model="product.item_code" autofocus="" class="form__input form__input--text" id="item-code" name="item-code" type="text" />
       </div>
       
       <!-- Product Name -->
@@ -144,7 +144,7 @@
       <textarea ng-model="product.notes" class="form__input form__textarea" id="notes"></textarea>
     </div>
   </fieldset>
-  <pre><code>{{product}}</code></pre>
+  <!-- <pre><code>{{product}}</code></pre> -->
   <button 
     ng-click="save()"
     class="button color-action mr1" >Save</button>

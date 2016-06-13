@@ -10,9 +10,15 @@
 angular.module('clinikoApp')
   .controller('ManageCtrl', function ($scope, $routeParams, ProductResource) {
     $scope.mode = 'add';
+    $scope.loading = false;
     if ($routeParams.id){
+    	$scope.loading = true;
     	$scope.mode = 'edit';
-    	$scope.product = ProductResource.get({id: $routeParams.id});
+    	$scope.product = ProductResource.get(
+    							{id: $routeParams.id},
+    							function () {
+    								$scope.loading = false;
+    							});
     }
 
   });
