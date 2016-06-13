@@ -1,6 +1,6 @@
 # cliniko
 
-![clinikp][https://s3.amazonaws.com/dropbox.christo/cliniko.png]
+![cliniko](https://s3.amazonaws.com/dropbox.christo/cliniko.png)
 
 ## Installation: 
 
