@@ -8,9 +8,11 @@ npm install && bower install
 ```
 ## Configuration:
 
-Config options - including the Cliniko API details can be found in: `app/scripts/services/settings.js`. 
+```
+cp app/scripts/services/settings.js.example app/scripts/services/settings.js
+```
 
-Typically these values would be configured by a build scripts at build-time. For development, edit them to suit your needs.
+Typically these values should be configured by a build scripts at build-time. For development, edit them to suit your needs.
 
 ## Build & development
 
